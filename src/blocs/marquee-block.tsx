@@ -14,7 +14,7 @@ export default function MarqueeBlock() {
             viewport={{ once: true }}
             transition={{ duration: .75 }}
             className="pt-16 mx-auto max-w-screen-xl w-full px-8">
-            <h3 className="text-center text-3xl  font-semibold">
+            <h3 className="text-center text-3xl font-semibold dark:text-neutral-100">
                 Our trusted partners
             </h3>
             <Marquee autoFill className="w-full mt-12">

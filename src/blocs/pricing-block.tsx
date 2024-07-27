@@ -42,7 +42,7 @@ export const SectionHeader = ({
   subTitleClassname?: string
 }) => (
   <section className="text-center">
-    <h2 className="text-3xl font-bold">{title}</h2>
+    <h2 className="text-3xl font-bold dark:text-neutral-100">{title}</h2>
     <p className={cn("text-xl pt-1", subTitleClassname)}>{subtitle}</p>
     <br />
   </section>

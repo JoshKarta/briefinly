@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export function HeroBlock() {
     return (
-        <motion.div initial={{ opacity: 0 }} viewport={{ once: true }} animate={{ opacity: 1 }} transition={{ duration: .5 }} className="overflow-hidden w-full px-4">
+        <motion.div initial={{ opacity: 0 }} viewport={{ once: true }} animate={{ opacity: 1 }} transition={{ duration: .5 }} className="overflow-hidden w-full px-4 dark:bg-black">
             <MacbookScroll
                 title={
                     <span>

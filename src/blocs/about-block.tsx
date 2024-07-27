@@ -16,7 +16,7 @@ export default function AboutBlock() {
 
             {/* Content */}
             <div className="relative flex flex-col justify-center items-center px-8">
-                <h3 className="text-3xl font-bold z-20">
+                <h3 className="text-3xl dark:text-neutral-100 font-bold z-20">
                     About
                 </h3>
                 <p className="max-w-4xl text-center text-neutral-500 mt-2 z-20">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>

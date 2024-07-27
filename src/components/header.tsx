@@ -36,7 +36,7 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 ${isScrolled && "border-b backdrop-blur-md shadow-sm"}`}
+      className={`dark:bg-black fixed top-0 w-full z-50 ${isScrolled && "border-b backdrop-blur-md shadow-sm"}`}
     >
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
