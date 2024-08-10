@@ -9,7 +9,7 @@ import { ProjectsBlock } from "@/blocs/projects-block";
 export default function Home() {
 
   return (
-    <main className="flex flex-col lg:pt-20 dark:bg-black">
+    <main className="flex flex-col lg:pt-28 dark:bg-black">
 
       {/* Hero */}
       <div className="w-full" id="home">

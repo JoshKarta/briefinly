@@ -9,8 +9,11 @@ export function HeroBlock() {
         <motion.div initial={{ opacity: 0 }} viewport={{ once: true }} animate={{ opacity: 1 }} transition={{ duration: .5 }} className="overflow-hidden w-full px-4 dark:bg-black">
             <MacbookScroll
                 title={
-                    <span>
-                        Unlock your potential<br /> Dive into the world of coding now.
+                    <span className="capitalize">
+                        Write Heartfelt <span className="text-brown-300">
+                            letters
+                        </span>&#46;
+                        <br /> share them with a link&#46;
                     </span>
                 }
                 badge={
