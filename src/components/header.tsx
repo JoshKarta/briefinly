@@ -13,6 +13,7 @@ import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
 import Image from "next/image";
 import { ModeToggle } from "./mode-toggle";
+import { LayoutDashboard } from "lucide-react";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -36,7 +37,7 @@ export default function Header() {
 
   return (
     <header
-      className={`dark:bg-black fixed top-0 w-full z-50 ${isScrolled && "border-b backdrop-blur-md shadow-sm"}`}
+      className={`fixed top-0 w-full z-50 ${isScrolled && "border-b dark:border-black/50 backdrop-blur-md shadow-sm"}`}
     >
       <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
@@ -48,7 +49,7 @@ export default function Header() {
 
           <div className="flex items-center gap-4">
             {isMounted ?
-              <div className="flex items-center justify-center gap-2">
+              <div className="flex items-center justify-center gap-4">
                 <SignedOut>
                   <Button asChild>
                     <SignInButton />
@@ -63,10 +64,15 @@ export default function Header() {
                   </Button>
                 </SignedOut>
 
+                <Button asChild size={"icon"}>
+                  <Link href={'/dashboard'}>
+                    <LayoutDashboard />
+                  </Link>
+                </Button>
+                <ModeToggle />
                 <SignedIn>
                   <UserButton afterSignOutUrl="/" />
                 </SignedIn>
-                <ModeToggle />
               </div> : <div className="sm:flex sm:gap-4">
                 <Skeleton className="w-20 h-10" />
                 <Skeleton className="w-20 h-10 hidden md:inline-block" />
