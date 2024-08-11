@@ -6,7 +6,6 @@ import Header from "@/components/header";
 import { Toaster } from "@/components/ui/sonner";
 import Footer from "@/components/footer";
 import { ThemeProvider } from "@/providers/Themeprovider";
-import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -25,18 +24,16 @@ export default function RootLayout({
       <link rel="icon" href="/briefinly-favicon.png" sizes="any" />
       <body className={poppins.className}>
         <ConvexClientProvider>
-          <ReactQueryProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system">
-              <Header />
-              <div className="min-h-screen">
-                {children}
-              </div>
-              <Footer />
-              <Toaster richColors position="top-right" />
-            </ThemeProvider>
-          </ReactQueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system">
+            <Header />
+            <div className="min-h-screen">
+              {children}
+            </div>
+            <Footer />
+            <Toaster richColors position="top-right" />
+          </ThemeProvider>
         </ConvexClientProvider>
       </body>
     </html>
