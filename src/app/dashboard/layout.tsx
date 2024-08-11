@@ -7,10 +7,14 @@ import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from "@/comp
 import Link from "next/link"
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
-import { LayoutDashboard, Mail } from "lucide-react";
+import { HomeIcon, LayoutDashboard, Mail } from "lucide-react";
 import ConvexClientProvider from "@/providers/ConvexClientProvider";
 import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/mode-toggle";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { usePathname } from "next/navigation";
+import { headers } from "next/headers";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -20,6 +24,11 @@ export const metadata: Metadata = {
 };
 
 const navLinks = [
+    {
+        text: 'Home',
+        url: '/dashboard',
+        icon: HomeIcon
+    },
     {
         text: 'Letters',
         url: '/dashboard/letters',
@@ -77,7 +86,7 @@ function SideBar() {
                             <TooltipTrigger asChild>
                                 <Link
                                     href={item.url}
-                                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                                    className={cn("flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8")}
                                     prefetch={false}
                                 >
                                     <item.icon className="h-5 w-5" />
@@ -103,7 +112,7 @@ function Header() {
                         <span className="sr-only">Toggle Menu</span>
                     </Button>
                 </SheetTrigger>
-                <SheetContent side="left" className="sm:max-w-xs">
+                <SheetContent side="left" className="sm:max-w-xs dark:bg-black dark:border-neutral-500 dark:!text-zinc-100">
                     <nav className="grid gap-6 text-lg font-medium">
                         <Link
                             rel="_blank"
@@ -116,7 +125,7 @@ function Header() {
                         </Link>
 
                         {navLinks.map((item) => (
-                            <Link href={item.url} key={item.url} className="flex items-center gap-4 px-2.5 text-foreground" prefetch={false}>
+                            <Link href={item.url} key={item.url} className="dark:text-zinc-100 flex items-center gap-4 px-2.5 text-foreground" prefetch={false}>
                                 <item.icon className="h-5 w-5" />
                                 {item.text}
                             </Link>
@@ -125,9 +134,12 @@ function Header() {
                 </SheetContent>
             </Sheet>
             <div className="flex-1">
-                <Link href={'/dashboard'} className="text-lg font-medium">Briefinly Dashboard</Link>
+                <Link href={'/dashboard'} className="flex items-center gap-2">
+                    <Image src={'/briefinly-favicon.png'} alt="logo" height={30} width={30} className="hidden sm:inline-block" />
+                    <p className="text-lg font-medium">Briefinly Dashboard</p>
+                </Link>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 mr-2">
                 <ModeToggle />
                 <UserButton afterSignOutUrl="/" />
             </div>

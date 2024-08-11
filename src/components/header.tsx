@@ -78,8 +78,6 @@ export default function Header() {
                 <Skeleton className="w-20 h-10 hidden md:inline-block" />
               </div>
             }
-
-
           </div>
         </div>
       </div>
