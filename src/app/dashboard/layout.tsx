@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { LayoutDashboard, Mail } from "lucide-react";
 import ConvexClientProvider from "@/providers/ConvexClientProvider";
 import { UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -39,12 +40,12 @@ export default function DashboardLayout({
                     <ThemeProvider
                         attribute="class"
                         defaultTheme="system">
-                        <Toaster richColors position="top-right" />
+                        <Toaster richColors position="top-center" />
                         <div className="flex min-h-screen w-full bg-muted/40 dark:bg-neutral-800">
                             <SideBar />
                             <div className="flex flex-1 flex-col sm:gap-4 sm:pl-14">
                                 <Header />
-                                <main className="flex-1 p-4 bg-white dark:bg-neutral-700 dark:text-zinc-100 mx-4 rounded-lg">
+                                <main className="flex-1 my-4 sm:mt-0 p-4 bg-white dark:bg-neutral-700 dark:text-zinc-100 mx-4 rounded-lg">
                                     {children}
                                 </main>
                             </div>
@@ -126,7 +127,10 @@ function Header() {
             <div className="flex-1">
                 <Link href={'/dashboard'} className="text-lg font-medium">Briefinly Dashboard</Link>
             </div>
-            <UserButton afterSignOutUrl="/" />
+            <div className="flex items-center gap-2">
+                <ModeToggle />
+                <UserButton afterSignOutUrl="/" />
+            </div>
         </header>
     )
 }

@@ -49,7 +49,7 @@ export default function Header() {
 
           <div className="flex items-center gap-4">
             {isMounted ?
-              <div className="flex items-center justify-center gap-4">
+              <div className="flex items-center justify-center gap-2">
                 <SignedOut>
                   <Button asChild>
                     <SignInButton />
@@ -64,13 +64,13 @@ export default function Header() {
                   </Button>
                 </SignedOut>
 
-                <Button asChild size={"icon"}>
-                  <Link href={'/dashboard'}>
-                    <LayoutDashboard />
-                  </Link>
-                </Button>
                 <ModeToggle />
                 <SignedIn>
+                  <Button asChild size={"icon"}>
+                    <Link href={'/dashboard'}>
+                      <LayoutDashboard />
+                    </Link>
+                  </Button>
                   <UserButton afterSignOutUrl="/" />
                 </SignedIn>
               </div> : <div className="sm:flex sm:gap-4">
