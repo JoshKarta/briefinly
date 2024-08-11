@@ -29,7 +29,7 @@ export default function LetterForm({ handleDialog }: { handleDialog: () => void 
                 setLoading(false)
             }
         }}
-            className='flex flex-col gap-4'
+            className='flex flex-col gap-4 mt-2'
         >
             <FormInput name='title'>
                 <Input type='text' name="title" />
