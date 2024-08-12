@@ -6,3 +6,8 @@ export const marqueeImages = [
   "https://imgproxy.tresamigosdevelopment.org/kings/zoom:0.65/plain/https://cms.kings.sr/assets/bce0b375-5c1d-4aa4-9975-f8bedadf9e08",
   "https://imgproxy.tresamigosdevelopment.org/kings/zoom:0.65/plain/https://cms.kings.sr/assets/93d2928b-ec00-4e19-b309-23a379dd24c0",
 ];
+
+
+export const techStack = [
+  "logos:nextjs-icon", "logos:supabase-icon", "simple-icon:clerk", "logos:typscript-icon", "logos:tailwindcss-icon", "simple-icons:shadcnui"
+]
