@@ -1,224 +1,175 @@
 "use client";
-
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { CheckCircle2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { fadeUp } from "@/constants/variants";
+import { Check } from "lucide-react";
+import { useState } from "react";
 
-type PricingSwitchProps = {
-  onSwitch: (value: string) => void;
-};
+const pricingPlans = [
+  {
+    name: "Basic",
+    description: "Start with essential tools to boost your online presence.",
+    monthlyPrice: 69,
+    annualPrice: 49,
+    link: "https://github.com/ansub/syntaxUI",
+    features: [
+      "SEO Strategy & Topic Recommendations",
+      "Competitor Analysis to stand out",
+      "Built-in Keyword Research",
+      "Target latest Google trends",
+      "SEO optimized blogs and socials",
+      "Technical SEO analysis and Reports",
+      "Target 100+ regions and languages",
+    ],
+  },
+  {
+    name: "Professional",
+    description:
+      "Unlock enhanced features and premium content to supercharge your business.",
+    monthlyPrice: 299,
+    annualPrice: 199,
+    link: "https://github.com/ansub/syntaxUI",
+    features: [
+      "Everything in Basic plan",
+      "Get 25 premium blogs",
+      "Index upto 1000 pages",
+      "Premium support",
+      "Local SEO",
+      "SEO Agent",
+    ],
+  },
+  {
+    name: "Premium",
+    description:
+      "Ultimate customization and dedicated support for enterprises.",
+    monthlyPrice: 2499,
+    annualPrice: 1666,
+    link: "https://github.com/ansub/syntaxUI",
+    features: [
+      "Everything in Professional plan",
+      "Get Unlimited premium blogs",
+      "Add your own AI Model key",
+      "Premium support & training sessions",
+    ],
+  },
+];
 
-type PricingCardProps = {
-  isYearly?: boolean;
-  title: string;
-  monthlyPrice?: number;
-  yearlyPrice?: number;
-  description: string;
-  features: string[];
-  actionLabel: string;
-  popular?: boolean;
-  exclusive?: boolean;
-};
+const Pricing = () => {
+  const [billingCycle, setBillingCycle] = useState<"M" | "A">("M");
 
-export const SectionHeader = ({
-  title,
-  subtitle,
-  subTitleClassname
-}: {
-  title: string;
-  subtitle?: string;
-  subTitleClassname?: string
-}) => (
-  <section className="text-center">
-    <h2 className="text-3xl font-bold dark:text-neutral-100">{title}</h2>
-    <p className={cn("text-xl pt-1", subTitleClassname)}>{subtitle}</p>
-    <br />
-  </section>
-);
-
-const PricingSwitch = ({ onSwitch }: PricingSwitchProps) => (
-  <Tabs defaultValue="0" className="w-40 mx-auto" onValueChange={onSwitch}>
-    <TabsList className="py-6 px-2">
-      <TabsTrigger value="0" className="text-base">
-        Monthly
-      </TabsTrigger>
-      <TabsTrigger value="1" className="text-base">
-        Yearly
-      </TabsTrigger>
-    </TabsList>
-  </Tabs>
-);
-
-const PricingCard = ({
-  isYearly,
-  title,
-  monthlyPrice,
-  yearlyPrice,
-  description,
-  features,
-  actionLabel,
-  popular,
-  exclusive,
-}: PricingCardProps) => (
-  <Card
-    className={cn(
-      `w-72 flex flex-col justify-between py-1 ${popular ? "border-rose-400" : "border-zinc-700"} mx-auto sm:mx-0`,
-      {
-        "animate-background-shine bg-white dark:bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] transition-colors":
-          exclusive,
-      }
-    )}
-  >
-    <div>
-      <CardHeader className="pb-8 pt-4">
-        <CardTitle className="text-lg text-zinc-700 dark:text-zinc-300 flex justify-between">
-          {title}
-          <AnimatePresence>
-            {isYearly && yearlyPrice && monthlyPrice ? (
-              <motion.span
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className={cn(
-                  "px-2.5 rounded-xl h-fit text-sm py-1 bg-zinc-200 text-black dark:bg-zinc-800 dark:text-white",
-                  {
-                    "bg-gradient-to-r from-orange-400 to-rose-400 dark:text-black ":
-                      popular,
-                  }
-                )}
-              >
-                Save ${monthlyPrice * 12 - yearlyPrice}
-              </motion.span>
-            ) : null}
-          </AnimatePresence>
-        </CardTitle>
-        <div className="flex gap-0.5">
-          <h3 className="text-3xl font-bold">
-            {yearlyPrice && isYearly
-              ? "$" + yearlyPrice
-              : monthlyPrice
-                ? "$" + monthlyPrice
-                : "Custom"}
-          </h3>
-          <AnimatePresence initial={false} mode="popLayout">
-            <motion.span
-              key={isYearly ? ("year" ? monthlyPrice : "month") : null}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
-              {yearlyPrice && isYearly
-                ? "/year"
-                : monthlyPrice
-                  ? "/month"
-                  : null}
-            </motion.span>
-          </AnimatePresence>
-          {/* <span className="flex flex-col justify-end text-sm mb-1">
-            {yearlyPrice && isYearly ? "/year" : monthlyPrice ? "/month" : null}
-          </span> */}
+  const Heading = () => (
+    <div className="relative z-10 my-12 flex flex-col items-center justify-center gap-4">
+      <div className="flex w-full flex-col items-center justify-center space-y-4 text-center">
+        <div className="mb-2 inline-block rounded-full bg-brown-100 px-2 py-[0.20rem] text-xs font-medium uppercase text-brown-500 dark:bg-brown-200">
+          {" "}
+          Pricing
         </div>
-        <CardDescription className="pt-1.5 h-12">{description}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex flex-col gap-2">
-        {features.map((feature: string) => (
-          <CheckItem key={feature} text={feature} />
-        ))}
-      </CardContent>
+        <p className="mt-2 text-3xl font-bold tracking-tight text-gray-800 dark:text-gray-200 sm:text-4xl">
+          Fair pricing, unfair advantage.
+        </p>
+        <p className="text-md max-w-xl text-gray-700 dark:text-gray-300 md:text-center">
+          Get started with Acme today and take your business to the next level.
+        </p>
+      </div>
+      <div className="flex items-center justify-center gap-3">
+        <button
+          onClick={() => setBillingCycle("M")}
+          className={cn(
+            `rounded-lg px-4 py-2 text-sm font-medium`,
+            billingCycle === "M"
+              ? "relative bg-brown-500 text-white"
+              : "text-gray-700 hover:bg-brown-100 dark:text-gray-300 dark:hover:text-black",
+          )}
+        >
+          Monthly
+          {billingCycle === "M" && <BackgroundShift shiftKey="monthly" />}
+        </button>
+        <button
+          onClick={() => setBillingCycle("A")}
+          className={cn(
+            `rounded-lg px-4 py-2 text-sm font-medium`,
+            billingCycle === "A"
+              ? "relative bg-brown-500 text-white"
+              : "text-gray-700 hover:bg-brown-100 dark:text-gray-300 dark:hover:text-black",
+          )}
+        >
+          Annual
+          {billingCycle === "A" && <BackgroundShift shiftKey="annual" />}
+        </button>
+      </div>
     </div>
-    <CardFooter className="mt-2">
-      <Button className="relative inline-flex w-full items-center justify-center rounded-md bg-black text-white dark:bg-white px-6 font-medium  dark:text-black transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
-        <div className="absolute -inset-0.5 -z-10 rounded-lg bg-gradient-to-b from-[#c7d2fe] to-[#8678f9] opacity-75 blur" />
-        {actionLabel}
-      </Button>
-    </CardFooter>
-  </Card>
-);
+  );
 
-const CheckItem = ({ text }: { text: string }) => (
-  <div className="flex gap-2">
-    <CheckCircle2 size={18} className="my-auto text-green-400" />
-    <p className="pt-0.5 text-zinc-700 dark:text-zinc-300 text-sm">{text}</p>
-  </div>
+  const PricingCards = () => (
+    // Cards div row
+    <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-8 lg:flex-row lg:gap-4">
+      {pricingPlans.map((plan, index) => (
+        // Single card
+        <div
+          key={index}
+          className="w-full rounded-lg border-[1px] border-gray-300 p-6 text-left dark:border-neutral-500 bg-white dark:bg-black shadow-md dark:shadow-neutral-600 z-30"
+        >
+          <p className="mb-1 mt-0 text-sm font-medium uppercase text-brown-500 dark:text-zinc-100">
+            {plan.name}
+          </p>
+          <p className="my-0 mb-6 text-sm text-neutral-500">{plan.description}</p>
+          <div className="mb-8 overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={billingCycle === "M" ? "monthly" : "annual"}
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ type: "spring", stiffness: 100 }}
+                className="my-0 text-3xl font-semibold text-gray-900 dark:text-gray-100"
+              >
+                <span>
+                  ${billingCycle === "M" ? plan.monthlyPrice : plan.annualPrice}
+                </span>
+                <span className="text-sm font-medium">
+                  /{billingCycle === "M" ? "month" : "year"}
+                </span>
+              </motion.p>
+            </AnimatePresence>
+            <motion.button
+              whileTap={{ scale: 0.985 }}
+              onClick={() => {
+                window.open(plan.link);
+              }}
+              className="mt-8 w-full rounded-lg bg-brown-500 py-2 text-sm font-medium text-white hover:bg-brown-500/90"
+            >
+              Get Started
+            </motion.button>
+          </div>
+          {plan.features.map((feature, idx) => (
+            <div key={idx} className="mb-3 flex items-center gap-2">
+              <Check className="text-brown-500" size={18} />
+              <span className="text-sm text-neutral-500">{feature}</span>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
+
+  return (
+    <section className="relative w-full overflow-hidden dark:bg-black px-4 py-12 text-black lg:px-2 lg:py-12">
+      <Heading />
+      <PricingCards />
+    </section>
+  );
+};
+
+const BackgroundShift = ({ shiftKey }: { shiftKey: string }) => (
+  <motion.span
+    key={shiftKey}
+    layoutId="bg-shift"
+    className="absolute inset-0 -z-10 rounded-lg bg-brown-500"
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    exit={{ opacity: 0, scale: 0.8 }}
+    transition={{ type: "spring", stiffness: 200, damping: 20 }}
+  />
 );
 
 export default function PricingBlock() {
-  const [isYearly, setIsYearly] = useState(false);
-  const togglePricingPeriod = (value: string) =>
-    setIsYearly(parseInt(value) === 1);
-
-  const plans = [
-    {
-      title: "Basic",
-      monthlyPrice: 10,
-      yearlyPrice: 100,
-      description: "Essential features you need to get started",
-      features: [
-        "Example Feature Number 1",
-        "Example Feature Number 2",
-        "Example Feature Number 3",
-      ],
-      actionLabel: "Get Started",
-    },
-    {
-      title: "Pro",
-      monthlyPrice: 25,
-      yearlyPrice: 250,
-      description: "Perfect for owners of small & medium businessess",
-      features: [
-        "Example Feature Number 1",
-        "Example Feature Number 2",
-        "Example Feature Number 3",
-      ],
-      actionLabel: "Get Started",
-      popular: true,
-    },
-    {
-      title: "Enterprise",
-      price: "Custom",
-      description: "Dedicated support and infrastructure to fit your needs",
-      features: [
-        "Example Feature Number 1",
-        "Example Feature Number 2",
-        "Example Feature Number 3",
-        "Super Exclusive Feature",
-      ],
-      actionLabel: "Contact Sales",
-      exclusive: true,
-    },
-  ];
-
-  return (
-    <motion.div id="pricingPlans"
-      variants={fadeUp}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true }}
-      transition={{ duration: .75 }}
-    >
-      <SectionHeader
-        title="Pricing Plans"
-        subtitle="Choose the plan that's right for you"
-      />
-      <PricingSwitch onSwitch={togglePricingPeriod} />
-      <section className="flex flex-col sm:flex-row sm:flex-wrap justify-center gap-8 mt-8">
-        {plans.map((plan) => {
-          return <PricingCard key={plan.title} {...plan} isYearly={isYearly} />;
-        })}
-      </section>
-    </motion.div>
-  );
+  return <Pricing />;
 }

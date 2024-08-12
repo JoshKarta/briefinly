@@ -16,30 +16,31 @@ export default function Home() {
         <HeroBlock />
       </div>
 
+      {/* Marquees */}
+      <div className="py-6 md:py-12">
+        <MarqueeBlock />
+      </div>
+
       {/* About */}
       <div className="w-full" id="about">
         <AboutBlock />
       </div>
 
-      {/* Services */}
+      {/* Services
       <div className="w-full" id="services">
         <BentobBlock />
       </div>
 
-      {/* Projects */}
+      Projects
       <div className="pb-16">
         <ProjectsBlock />
-      </div>
+      </div> */}
 
       {/* Pricing */}
-      <div className="w-full bg-neutral-50/55 py-16">
+      <div className="w-full py-2 md:py-12">
         <PricingBlock />
       </div>
 
-      {/* Marquees */}
-      <div>
-        <MarqueeBlock />
-      </div>
 
       {/* NewsLetter */}
       <div>
