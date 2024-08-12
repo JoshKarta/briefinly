@@ -17,7 +17,7 @@ export default function MarqueeBlock() {
             <h3 className="text-center text-3xl font-semibold dark:text-neutral-100">
                 Tech stack <p className="hidden md:inline-block">used for this project</p>.
             </h3>
-            <Marquee autoFill className="w-full mt-12">
+            <Marquee autoFill className="w-full mt-12" delay={1} speed={10}>
                 {techStack.map((image, i) => (
                     <Icon icon={image} key={i} className="w-10 h-10 md:w-12 md:h-12 ml-20" style={{color:"white"}}/>
                 ))}

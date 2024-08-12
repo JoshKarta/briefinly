@@ -24,8 +24,6 @@ import { IconCaretLeftFilled } from "@tabler/icons-react";
 import { IconCaretDownFilled } from "@tabler/icons-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
-import Link from "next/link";
 
 export const MacbookScroll = ({
     src,
@@ -70,14 +68,14 @@ export const MacbookScroll = ({
     return (
         <div
             ref={ref}
-            className="md:min-h-(calc(100vh_-_112px)) flex flex-col items-center py-0 md:pt-20 lg:pt-0 md:pb-20 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-50 relative"
+            className="md:min-h-(calc(100vh_-_112px)) flex flex-col items-center py-0 md:pt-20 lg:pt-0 md:pb-20 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-50 relative w-full"
         >
             <motion.h2
                 style={{
                     translateY: textTransform,
                     opacity: textOpacity,
                 }}
-                className="dark:text-white text-neutral-800 text-5xl lg:text-6xl font-bold mb-12 text-center"
+                className="dark:text-white text-neutral-800 text-5xl lg:text-6xl font-bold mb-12 text-center w-full"
             >
                 {title || (
                     <span>
@@ -152,7 +150,8 @@ export const Lid = ({
                     className="absolute inset-0 bg-[#010101] rounded-lg flex items-center justify-center"
                 >
                     <span className="text-white">
-                        <AceternityLogo />
+                        {/* <AceternityLogo /> */}
+                        <Image src={'/briefinly-favicon.png'} alt="logo" height={30} width={30}/>
                     </span>
                 </div>
             </div>

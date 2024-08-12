@@ -9,5 +9,5 @@ export const marqueeImages = [
 
 
 export const techStack = [
-  "logos:nextjs-icon", "logos:supabase-icon", "simple-icon:clerk", "logos:typscript-icon", "logos:tailwindcss-icon", "simple-icons:shadcnui"
+  "logos:nextjs-icon", "logos:supabase-icon", "simple-icons:clerk", "logos:typescript-icon", "simple-icons:shadcnui", "logos:tailwindcss-icon", "tabler:brand-framer-motion" 
 ]
