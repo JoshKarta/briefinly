@@ -26,7 +26,7 @@ export default function EnvelopePage() {
             setLoading(false)
         }
         fetchLetters()
-    }, [])
+    }, [params.id])
 
     if (loading) {
         return (

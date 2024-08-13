@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { SectionHeader } from "@/blocs/pricing-block";
+// import { SectionHeader } from "@/blocs/pricing-block";
 
 type Card = {
     id: number;

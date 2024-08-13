@@ -7,7 +7,6 @@ import {
   IconSignature,
   IconTableColumn,
 } from "@tabler/icons-react";
-import { SectionHeader } from "./pricing-block";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/constants/variants";
@@ -21,11 +20,11 @@ export default function BentobBlock() {
       viewport={{ once: true }}
       transition={{ duration: .75 }}
     >
-      <SectionHeader
+      {/* <SectionHeader
         title="Services"
         subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Tincidunt nunc pulvinar sapien et ligula ullamcorper."
         subTitleClassname="text-neutral-500 text-base max-w-4xl mx-auto"
-      />
+      /> */}
       <BentoGrid className="max-w-4xl mx-auto">
         {items.map((item, i) => (
           <BentoGridItem

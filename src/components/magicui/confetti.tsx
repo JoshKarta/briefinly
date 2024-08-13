@@ -41,6 +41,7 @@ const Confetti = forwardRef<ConfettiRef, Props>((props, ref) => {
     ...rest
   } = props;
   const instanceRef = useRef<ConfettiInstance | null>(null); // confetti instance
+  Confetti.displayName = "Confetti";
 
   const canvasRef = useCallback(
     // https://react.dev/reference/react-dom/components/common#ref-callback
@@ -112,13 +113,14 @@ function ConfettiButton({ options, children, ...props }: ConfettiButtonProps) {
       },
     });
   };
-
+  
   return (
     <Button onClick={handleClick} {...props}>
       {children}
     </Button>
   );
 }
+ConfettiButton.displayName = 'ConfettiButton';
 
 export { Confetti, ConfettiButton };
 
