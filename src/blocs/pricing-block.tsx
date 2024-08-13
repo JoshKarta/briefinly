@@ -106,12 +106,14 @@ const Pricing = () => {
         // Single card
         <div
           key={index}
-          className="w-full rounded-lg border-[1px] border-gray-300 p-6 text-left dark:border-neutral-500 bg-white dark:bg-black shadow-md dark:shadow-neutral-600 z-30"
+          className="z-30 w-full rounded-lg border-[1px] border-gray-300 bg-white p-6 text-left shadow-md dark:border-neutral-500 dark:bg-black dark:shadow-neutral-600"
         >
           <p className="mb-1 mt-0 text-sm font-medium uppercase text-brown-500 dark:text-zinc-100">
             {plan.name}
           </p>
-          <p className="my-0 mb-6 text-sm text-neutral-500">{plan.description}</p>
+          <p className="my-0 mb-6 text-sm text-neutral-500">
+            {plan.description}
+          </p>
           <div className="mb-8 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.p
@@ -151,9 +153,12 @@ const Pricing = () => {
   );
 
   return (
-    <section className="relative w-full overflow-hidden dark:bg-black px-4 py-12 text-black lg:px-2 lg:py-12">
-      <Heading />
-      <PricingCards />
+    <section className="relative w-full overflow-hidden py-12 text-black dark:bg-black lg:py-12">
+<img src="/vector-2.png" alt="" className="absolute z-10 object-contain w-full"/>
+      <div className="px-4 lg:px-2">
+        <Heading />
+        <PricingCards />
+      </div>
     </section>
   );
 };
