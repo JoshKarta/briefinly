@@ -23,7 +23,7 @@ export default function ActionBlock() {
         >
           <Link href={"/dashboard"}>
             <span className="text-center transition duration-500 group-hover/modal-btn:translate-x-40">
-              Get Stared Now
+              Get Started Now
             </span>
             <div className="absolute inset-0 z-20 flex -translate-x-40 items-center justify-center text-white transition duration-500 group-hover/modal-btn:translate-x-0">
               📝
