@@ -1,4 +1,7 @@
+"use client"
+import { toast } from "sonner";
 import FormInput from "./FormInput";
+import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import Image from "next/image";
 
@@ -26,7 +29,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-white dark:bg-neutral-900 border-neutral-100 border-t">
+    <footer className="bg-white dark:bg-black border-neutral-100 dark:border-neutral-500 border-t">
     <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8">
       <div className="lg:grid lg:grid-cols-2">
         <div
@@ -52,26 +55,9 @@ export default function Footer() {
             </div>
   
             <form className="mt-6 w-full">
-              {/* <label htmlFor="UserEmail" className="sr-only"> Email </label>
-  
-              <div
-                className="rounded-md border border-neutral-100 p-2 focus-within:ring sm:flex sm:items-center sm:gap-4"
-              >
-                <input
-                  type="email"
-                  id="UserEmail"
-                  placeholder="john@rhcp.com"
-                  className="w-full border-none focus:border-transparent focus:ring-transparent sm:text-sm"
-                />
-  
-                <button
-                  className="mt-1 w-full rounded bg-teal-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0"
-                >
-                  Sign Up
-                </button>
-              </div> */}
-              <FormInput name="email">
-                <Input />
+              <FormInput name="email" className="relative">
+                <Input className="pr-32 placeholder:text-neutral-300 placeholder:font-thin" placeholder="This is just for showcase" />
+                <Button className="absolute w-fit right-[2px] top-5" size={"sm"} type="button" onClick={()=>{toast.success("Thank you for requesting a demo. We will contact you soon")}}>Send Request</Button>
               </FormInput>
             </form>
           </div>
