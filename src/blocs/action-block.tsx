@@ -5,8 +5,8 @@ import React from "react";
 
 export default function ActionBlock() {
   return (
-    <div className="container-screen relative px-4 dark:text-zinc-100 sm:px-6 lg:px-8">
-      <div className="flex w-full max-w-3xl flex-col items-center justify-center gap-4 text-center">
+    <div className="container-screen relative flex w-full justify-center overflow-hidden px-4 dark:text-zinc-100 sm:px-6 lg:px-8">
+      <div className="flex w-full max-w-3xl flex-col items-center justify-center gap-4 py-20 text-center">
         <h3 className="text-center text-3xl font-bold">
           Write and share your letters now with the ones you love within just a
           few seconds!
@@ -35,11 +35,11 @@ export default function ActionBlock() {
   );
 }
 
-const DottedCircle = ({ className }: { className: string }) => {
+export const DottedCircle = ({ className }: { className?: string }) => {
   return (
     <div
       className={cn(
-        "h-[300px] w-[300px] bg-white bg-dot-black/[0.2] dark:bg-black dark:bg-dot-white/[0.2]",
+        "z-0 h-[300px] w-[300px] rounded-full bg-white bg-dot-black/[0.2] dark:bg-black dark:bg-dot-white/[0.2]",
         className,
       )}
     ></div>

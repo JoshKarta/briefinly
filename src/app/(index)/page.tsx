@@ -2,7 +2,7 @@ import PricingBlock from "@/blocs/pricing-block";
 import AboutBlock from "@/blocs/about-block";
 import { HeroBlock } from "@/blocs/hero-block";
 import MarqueeBlock from "@/blocs/marquee-block";
-import ActionBlock from "@/blocs/action-block";
+import ActionBlock, { DottedCircle } from "@/blocs/action-block";
 
 export default function Home() {
   return (
@@ -23,12 +23,14 @@ export default function Home() {
       </div>
 
       {/* Pricing */}
-      <div className="w-full py-2 md:py-12">
+      <div className="z-20 w-full py-2 md:py-12">
         <PricingBlock />
       </div>
 
       {/* Action */}
-      <div className="w-full py-2 md:py-12">
+      <div className="relative w-full overflow-hidden py-2 md:pb-12">
+        <DottedCircle className="absolute -left-20 -top-14" />
+        <DottedCircle className="absolute -bottom-12 -right-10 hidden md:inline-block" />
         <ActionBlock />
       </div>
     </main>
