@@ -13,8 +13,8 @@ import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/mode-toggle";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
-import { headers } from "next/headers";
+import Dashboard from "./dashboard";
+
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -50,7 +50,8 @@ export default function DashboardLayout({
                         attribute="class"
                         defaultTheme="system">
                         <Toaster richColors position="top-center" />
-                        <div className="flex min-h-screen w-full bg-muted/40 dark:bg-neutral-800">
+                        {/* <div className="flex min-h-screen w-full bg-muted/40 dark:bg-neutral-800">
+
                             <SideBar />
                             <div className="flex flex-1 flex-col sm:gap-4 sm:pl-14">
                                 <Header />
@@ -58,7 +59,10 @@ export default function DashboardLayout({
                                     {children}
                                 </main>
                             </div>
-                        </div>
+                        </div> */}
+                        <Dashboard>
+                            {children}
+                        </Dashboard>
                     </ThemeProvider>
                 </ConvexClientProvider>
             </body>
