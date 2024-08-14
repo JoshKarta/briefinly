@@ -26,6 +26,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
+import Link from "next/link";
 
 
 export default function LettersList() {
@@ -33,6 +34,8 @@ export default function LettersList() {
   const [letters, setLetters] = useState<any>()
   const [loading, setLoading] = useState<boolean>(true)
   const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
   useEffect(() => {
     const fetchLetters = async () => {
@@ -49,7 +52,6 @@ export default function LettersList() {
 
   const handleCopy = async (text: string) => {
     try {
-      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
       await navigator.clipboard.writeText(`${baseUrl}/share/${text}`);
       toast.info("Link copied!")
     } catch (err) {
@@ -81,8 +83,10 @@ export default function LettersList() {
               {item.text}
             </p>
             <div className="md:flex items-center gap-2 hidden">
-              <Button size={"icon"} className="w-8 h-8">
-                <EyeIcon className="icon-size" />
+              <Button size={"icon"} className="w-8 h-8" asChild>
+                <Link href={`${baseUrl}/share/${item.letter_id}`} target="_blank">
+                  <EyeIcon className="icon-size" />
+                </Link>
               </Button>
               <Button size={"icon"} className="w-8 h-8" variant={"outline"} onClick={() => { handleCopy(item.letter_id) }}>
                 <CopyIcon className="icon-size" />
