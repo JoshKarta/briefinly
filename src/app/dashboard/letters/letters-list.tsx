@@ -49,7 +49,8 @@ export default function LettersList() {
 
   const handleCopy = async (text: string) => {
     try {
-      await navigator.clipboard.writeText(`${process.env.BASE_URL}/share/${text}`);
+      const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+      await navigator.clipboard.writeText(`${baseUrl}/share/${text}`);
       toast.info("Link copied!")
     } catch (err) {
       console.error("Failed to copy text: ", err);
