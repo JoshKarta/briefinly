@@ -12,7 +12,6 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/mode-toggle";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 export default function Dashboard({ children }: { children: ReactNode }) {
     const { user } = useUser()
     const links = [
@@ -108,7 +107,6 @@ export const LogoIcon = () => {
     );
 };
 
-// Dummy dashboard component with content
 const DashboardContent = ({ children }: { children: ReactNode }) => {
     return (
         <div className="flex flex-1">
