@@ -2,11 +2,10 @@
 import Link from "next/link";
 import { MacbookScroll } from "@/components/macbook-scroll";
 import { Linkedin } from "lucide-react";
-import { motion } from "framer-motion";
 
 export function HeroBlock() {
     return (
-        <motion.div initial={{ opacity: 0 }} viewport={{ once: true }} animate={{ opacity: 1 }} transition={{ duration: .5 }} className="overflow-hidden w-full px-4 dark:bg-black">
+        <div className="overflow-hidden w-full px-4 dark:bg-black">
             <MacbookScroll
                 title={
                     <span className="capitalize">
@@ -25,7 +24,7 @@ export function HeroBlock() {
                 src={`/hero-image.png`}
                 showGradient={true}
             />
-        </motion.div>
+        </div>
     );
 }
 // Peerlist logo

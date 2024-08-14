@@ -14,8 +14,8 @@ export default function MarqueeBlock() {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            transition={{ duration: .75 }}
-            className="mx-auto max-w-screen-xl w-full px-8">
+            transition={{ duration: 1, delay: .25 }}
+            className="mx-auto max-w-screen-xl w-full px-8 z-[99]">
             <h3 className="text-center text-3xl font-semibold dark:text-neutral-100">
                 Tech stack <p className="hidden md:inline-block">used for this project</p>.
             </h3>

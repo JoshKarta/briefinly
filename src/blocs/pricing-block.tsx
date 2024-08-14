@@ -101,12 +101,16 @@ const Pricing = () => {
 
   const PricingCards = () => (
     // Cards div row
-    <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-8 lg:flex-row lg:gap-4">
+    <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col items-center lg:items-stretch gap-8 lg:flex-row lg:gap-4">
       {pricingPlans.map((plan, index) => (
         // Single card
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.3, ease: "easeInOut", delay: 0.3 * index }}
           key={index}
-          className="z-30 w-full rounded-lg border-[1px] border-gray-300 bg-white p-6 text-left shadow-md dark:border-neutral-500 dark:bg-black dark:shadow-neutral-600"
+          className="z-30 w-3/4 md:w-full rounded-lg border-[1px] border-gray-300 bg-white p-6 text-left shadow-md dark:border-neutral-500 dark:bg-black dark:shadow-neutral-600"
         >
           <p className="mb-1 mt-0 text-sm font-medium uppercase text-brown-500 dark:text-zinc-100">
             {plan.name}
@@ -147,14 +151,14 @@ const Pricing = () => {
               <span className="text-sm text-neutral-500">{feature}</span>
             </div>
           ))}
-        </div>
+        </motion.div>
       ))}
     </div>
   );
 
   return (
     <section className="relative w-full overflow-hidden py-12 text-black dark:bg-black lg:py-12">
-<img src="/vector-2.png" alt="" className="absolute z-10 object-contain w-full"/>
+      <img src="/vector-2.png" alt="" className="absolute z-10 object-contain w-full" />
       <div className="px-4 lg:px-2">
         <Heading />
         <PricingCards />

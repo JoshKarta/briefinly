@@ -18,9 +18,9 @@ export default function Home() {
       </div>
 
       {/* About */}
-      <div className="w-full" id="about">
+      {/* <div className="w-full" id="about">
         <AboutBlock />
-      </div>
+      </div> */}
 
       {/* Pricing */}
       <div className="z-20 w-full py-2 md:py-12">

@@ -1,18 +1,27 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import React from "react";
+import { motion } from "framer-motion";
+import { fadeUp } from "@/constants/variants";
 
 export default function ActionBlock() {
   return (
-    <div className="container-screen relative flex w-full justify-center overflow-hidden px-4 dark:text-zinc-100 sm:px-6 lg:px-8">
+    <motion.div
+      variants={fadeUp}
+      initial="initial"
+      whileInView="animate"
+      viewport={{ once: true }}
+      transition={{ duration: 1, delay: .25 }}
+      className="container-screen relative flex w-full justify-center overflow-hidden px-4 dark:text-zinc-100 sm:px-6 lg:px-8">
       <div className="flex w-full max-w-3xl flex-col items-center justify-center gap-4 py-20 text-center">
-        <h3 className="text-center text-3xl font-bold">
+        <h3 className="text-center text-2xl md:text-4xl font-bold">
           Write and share your letters now with the ones you love within just a
           few seconds!
         </h3>
 
-        <p className="text-sm">
+        <p className="text-sm px-10 md:px-0">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo enim ut
           esse consequatur.
         </p>
@@ -31,7 +40,7 @@ export default function ActionBlock() {
           </Link>
         </Button>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

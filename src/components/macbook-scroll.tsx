@@ -71,6 +71,10 @@ export const MacbookScroll = ({
             className="md:min-h-(calc(100vh_-_112px)) flex flex-col items-center py-0 md:pt-20 lg:pt-0 md:pb-20 justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-50 relative w-full"
         >
             <motion.h2
+                initial={{ opacity: 0 }}
+                viewport={{ once: true }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
                 style={{
                     translateY: textTransform,
                     opacity: textOpacity,
@@ -85,37 +89,46 @@ export const MacbookScroll = ({
             </motion.h2>
 
             {/* Lid */}
-            <Lid
-                src={src}
-                scaleX={scaleX}
-                scaleY={scaleY}
-                rotate={rotate}
-                translate={translate}
-            />
-            {/* Base area */}
-            <div className="h-[22rem] w-[32rem] bg-gray-200 dark:bg-[#272729] rounded-2xl overflow-hidden relative -z-10">
-                {/* above keyboard bar */}
-                <div className="h-10 w-full relative">
-                    <div className="absolute inset-x-0 mx-auto w-[80%] h-4 bg-[#050505]" />
+            <motion.div
+                initial={{ opacity: 0 }}
+                viewport={{ once: true }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: .5, duration: 1 }}
+            >
+
+                <Lid
+                    src={src}
+                    scaleX={scaleX}
+                    scaleY={scaleY}
+                    rotate={rotate}
+                    translate={translate}
+                />
+                {/* Base area */}
+                <div className="h-[22rem] w-[32rem] bg-gray-200 dark:bg-[#272729] rounded-2xl overflow-hidden relative -z-10">
+                    {/* above keyboard bar */}
+                    <div className="h-10 w-full relative">
+                        <div className="absolute inset-x-0 mx-auto w-[80%] h-4 bg-[#050505]" />
+                    </div>
+                    <div className="flex relative">
+                        <div className="mx-auto w-[10%] overflow-hidden  h-full">
+                            <SpeakerGrid />
+                        </div>
+                        <div className="mx-auto w-[80%] h-full">
+                            <Keypad />
+                        </div>
+                        <div className="mx-auto w-[10%] overflow-hidden  h-full">
+                            <SpeakerGrid />
+                        </div>
+                    </div>
+                    <Trackpad />
+                    <div className="h-2 w-20 mx-auto inset-x-0 absolute bottom-0 bg-gradient-to-t from-[#272729] to-[#050505] rounded-tr-3xl rounded-tl-3xl" />
+                    {showGradient && (
+                        <div className="h-40 w-full absolute bottom-0 inset-x-0 bg-gradient-to-t dark:from-black from-white via-white dark:via-black to-transparent z-50"></div>
+                    )}
+                    {badge && <div className="absolute bottom-4 left-4">{badge}</div>}
                 </div>
-                <div className="flex relative">
-                    <div className="mx-auto w-[10%] overflow-hidden  h-full">
-                        <SpeakerGrid />
-                    </div>
-                    <div className="mx-auto w-[80%] h-full">
-                        <Keypad />
-                    </div>
-                    <div className="mx-auto w-[10%] overflow-hidden  h-full">
-                        <SpeakerGrid />
-                    </div>
-                </div>
-                <Trackpad />
-                <div className="h-2 w-20 mx-auto inset-x-0 absolute bottom-0 bg-gradient-to-t from-[#272729] to-[#050505] rounded-tr-3xl rounded-tl-3xl" />
-                {showGradient && (
-                    <div className="h-40 w-full absolute bottom-0 inset-x-0 bg-gradient-to-t dark:from-black from-white via-white dark:via-black to-transparent z-50"></div>
-                )}
-                {badge && <div className="absolute bottom-4 left-4">{badge}</div>}
-            </div>
+            </motion.div>
+
         </div>
     );
 };
@@ -151,7 +164,7 @@ export const Lid = ({
                 >
                     <span className="text-white">
                         {/* <AceternityLogo /> */}
-                        <Image src={'/briefinly-favicon.png'} alt="logo" height={30} width={30}/>
+                        <Image src={'/briefinly-favicon.png'} alt="logo" height={30} width={30} />
                     </span>
                 </div>
             </div>
