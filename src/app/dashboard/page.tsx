@@ -9,7 +9,7 @@ export default function DashboardPage() {
 
     return (
         <div className='dark:text-zinc-100'>
-            <div className='flex justify-between items-center w-full'>
+            <div className='flex flex-col sm:flex-row gap-2 sm:justify-between sm:items-center w-full'>
                 <h3 className='font-bold text-3xl capitalize'>Hello, {user?.username}</h3>
                 <div className='flex items-center gap-2'>
                     <p className='font-medium'>

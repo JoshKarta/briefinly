@@ -20,7 +20,7 @@ export default function CreateLetter() {
     }
 
     return (
-        <>
+        <div className='flex flex-col md:flex-row md:justify-between w-full gap-1'>
             <PageHeading title='Letters' description='Here you can see all the letters you wrote.' />
 
             <Dialog onOpenChange={setIsOpen} open={isOpen}>
@@ -37,6 +37,6 @@ export default function CreateLetter() {
                     <LetterForm handleDialog={handleDialog} />
                 </DialogContent>
             </Dialog>
-        </>
+        </div>
     )
 }

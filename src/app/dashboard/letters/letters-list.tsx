@@ -101,7 +101,11 @@ export default function LettersList() {
                 <DropdownMenuContent>
                   <DropdownMenuLabel>Actions</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>View</DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href={`${baseUrl}/share/${item.letter_id}`} target="_blank">
+                      View
+                    </Link>
+                  </DropdownMenuItem>
                   <DropdownMenuItem onClick={() => { handleCopy(item.letter_id) }}>Copy URL</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => { setIsOpen(!isOpen) }}>Delete</DropdownMenuItem>
                 </DropdownMenuContent>
