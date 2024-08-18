@@ -166,6 +166,10 @@ export const SidebarLink = ({
 }) => {
   const { open, animate, setOpen } = useSidebar();
 
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
   return (
     <Link
       href={link.href}
@@ -174,6 +178,7 @@ export const SidebarLink = ({
         className
       )}
       {...props}
+      onClick={handleClick}
     >
       {link.icon}
 
