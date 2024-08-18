@@ -88,7 +88,7 @@ export default function LettersList() {
       <CreateLetter fetchLetters={fetchLetters} />
       {/* All Fetched Letters */}
       <div className='mt-4 flex flex-col gap-2'>
-        {letters && letters?.length === 0 ? <p className="mt-4 text-neutral-500 dark:text-zinc-100 text-2xl text-center">You haven't written any letters yet </p> : letters?.map((item: any) => (
+        {letters && letters?.length === 0 ? <p className="mt-4 text-neutral-500 dark:text-zinc-100 text-2xl text-center">You haven&apos;t written any letters yet </p> : letters?.map((item: any) => (
           <Fragment key={item.id}>
             {/* Single Card that displays letter information */}
             <Card className="hover:shadow-md dark:shadow-neutral-500 hover-effect">
