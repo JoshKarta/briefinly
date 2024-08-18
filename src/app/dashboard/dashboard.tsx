@@ -12,6 +12,17 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { ModeToggle } from "@/components/mode-toggle";
+import {
+    Breadcrumb,
+    BreadcrumbEllipsis,
+    BreadcrumbItem,
+    BreadcrumbLink,
+    BreadcrumbList,
+    BreadcrumbPage,
+    BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
+import { usePathname } from "next/navigation";
+
 export default function Dashboard({ children }: { children: ReactNode }) {
     const { user } = useUser()
     const links = [
@@ -40,6 +51,10 @@ export default function Dashboard({ children }: { children: ReactNode }) {
     ];
 
     const [open, setOpen] = useState(false);
+
+    const pathname = usePathname()
+    const pathSegments = pathname.split('/').filter(segment => segment !== '')
+
     return (
         <div
             className={cn(
@@ -71,6 +86,34 @@ export default function Dashboard({ children }: { children: ReactNode }) {
                     </div>
                 </SidebarBody>
             </Sidebar>
+            <Breadcrumb className="md:hidden px-4 mb-2">
+                <BreadcrumbList className="text-zinc-400">
+                    <BreadcrumbItem>
+                        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                    </BreadcrumbItem>
+                    <BreadcrumbSeparator />
+                    {pathSegments.map((segment, index) => {
+                        const href = `/${pathSegments.slice(0, index + 1).join('/')}`
+                        const isLast = index === pathSegments.length - 1
+
+                        return (
+                            <React.Fragment key={href}>
+                                <BreadcrumbItem>
+                                    {isLast ? (
+                                        <BreadcrumbPage className="text-zinc-100">{segment}</BreadcrumbPage>
+                                    ) : (
+                                        <BreadcrumbLink href={href}>
+                                            {segment}
+                                        </BreadcrumbLink>
+                                    )}
+                                </BreadcrumbItem>
+                                {!isLast && <BreadcrumbSeparator />}
+                            </React.Fragment>
+                        )
+                    })}
+                </BreadcrumbList>
+            </Breadcrumb>
+
             <DashboardContent>
                 {children}
             </DashboardContent>
