@@ -1,7 +1,8 @@
 "use client"
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { motion } from "framer-motion";
-import confetti from 'canvas-confetti';
+import Confetti, { ConfettiRef } from '@/components/magicui/confetti';
+import { basicConfetti, customConfetti, starsConfetti } from '@/constants/confetti-types';
 
 type Envelope = {
     isOpen: boolean
@@ -10,35 +11,25 @@ type Envelope = {
 }
 
 export default function Envelope({ isOpen, handleClick, data }: Envelope) {
+    const confettiRef = useRef<ConfettiRef>(null)
+
     const handleConfetti = () => {
-        const defaults = {
-            spread: 360,
-            ticks: 50,
-            gravity: 0,
-            decay: 0.94,
-            startVelocity: 30,
-            colors: ["#FFE400", "#FFBD00", "#E89400", "#FFCA6C", "#FDFFB8"],
-        };
+        switch (data.confetti_type) {
+            case "basic":
+                basicConfetti()
+                break;
 
-        const shoot = () => {
-            confetti({
-                ...defaults,
-                particleCount: 40,
-                scalar: 1.2,
-                shapes: ["star"],
-            });
+            case "stars":
+                starsConfetti()
+                break;
 
-            confetti({
-                ...defaults,
-                particleCount: 10,
-                scalar: 0.75,
-                shapes: ["circle"],
-            });
-        };
+            case "custom":
+                customConfetti(data.confetti_emoji)
+                break;
 
-        setTimeout(shoot, 0);
-        setTimeout(shoot, 100);
-        setTimeout(shoot, 200);
+            default:
+                break;
+        }
     };
 
     return (
@@ -52,6 +43,7 @@ export default function Envelope({ isOpen, handleClick, data }: Envelope) {
                     }
                 }}
             >
+
                 {/* Envelope Flap */}
                 <motion.div
                     className="absolute top-1 w-0 h-0 border-l-[190px] border-l-transparent rounded-lg border-t-[150px] border-t-yellow-200 border-r-[190px] border-r-transparent origin-top"
