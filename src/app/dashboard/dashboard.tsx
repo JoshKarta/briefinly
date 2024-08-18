@@ -73,7 +73,9 @@ export default function Dashboard({ children }: { children: ReactNode }) {
                         </div>
                     </div>
                     <div className="flex flex-col gap-4">
-                        <ModeToggle />
+                        <div className="hidden md:inline-block">
+                            <ModeToggle />
+                        </div>
                         <SidebarLink
                             link={{
                                 label: user?.username as string,

@@ -3,7 +3,6 @@ import { createLetter } from '@/actions/action'
 import FormInput from '@/components/FormInput'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { useUser } from '@clerk/nextjs'
 import { useRef, useState } from 'react'
@@ -32,7 +31,7 @@ export default function LetterForm({ handleDialog }: { handleDialog: () => void 
             className='flex flex-col gap-4 mt-2'
         >
             <FormInput name='title'>
-                <Input type='text' name="title" />
+                <Input type='text' name="title" placeholder='Dear Jane' />
             </FormInput>
             <input type="hidden" name="user_id" value={user?.id} />
             <FormInput name='text'>
