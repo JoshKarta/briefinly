@@ -26,13 +26,13 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
 import Link from "next/link";
+import CreateLetter from "./create-letter";
 
 
 export default function LettersList() {
   const { user } = useUser()
   const [letters, setLetters] = useState<any>()
   const [loading, setLoading] = useState<boolean>(true)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
   const [openDialogId, setOpenDialogId] = useState<number | null>(null)
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
@@ -60,7 +60,6 @@ export default function LettersList() {
     } else {
       toast.success("Letter deleted successfully.")
       await fetchLetters() // Refetch letters after successful deletion
-      setIsOpen(false) // Close the alert dialog
     }
   }
 
@@ -84,78 +83,89 @@ export default function LettersList() {
   }
 
   return (
-    <div className='mt-4 flex flex-col gap-2'>
-      {letters && letters?.length === 0 ? <p className="mt-4 text-neutral-500 dark:text-zinc-100 text-2xl text-center">You haven't written any letters yet </p> : letters?.map((item: any) => (
-        <Fragment key={item.id}>
-          <Card className="hover:shadow-md dark:shadow-neutral-500 hover-effect">
-            <CardHeader className="pb-0">
-              <CardTitle className="font-medium text-lg">
-                {item.title !== null ? item.title : "Title"}
+    <div>
+      {/* Modal for creating a Letter */}
+      <CreateLetter fetchLetters={fetchLetters} />
+      {/* All Fetched Letters */}
+      <div className='mt-4 flex flex-col gap-2'>
+        {letters && letters?.length === 0 ? <p className="mt-4 text-neutral-500 dark:text-zinc-100 text-2xl text-center">You haven't written any letters yet </p> : letters?.map((item: any) => (
+          <Fragment key={item.id}>
+            {/* Single Card that displays letter information */}
+            <Card className="hover:shadow-md dark:shadow-neutral-500 hover-effect">
+              <CardHeader className="pb-0">
+                <CardTitle className="font-medium text-lg">
+                  {item.title !== null ? item.title : "Title"}
 
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="pb-2 flex items-center justify-between">
-              <p className="w-1/2 truncate text-neutral-400">
-                {item.text}
-              </p>
-              <div className="md:flex items-center gap-2 hidden">
-                <Button size={"icon"} className="w-8 h-8" asChild>
-                  <Link href={`${baseUrl}/share/${item.letter_id}`} target="_blank">
-                    <EyeIcon className="icon-size" />
-                  </Link>
-                </Button>
-                <Button size={"icon"} className="w-8 h-8" variant={"outline"} onClick={() => { handleCopy(item.letter_id) }}>
-                  <CopyIcon className="icon-size" />
-                </Button>
-                <Button size={"icon"} className="w-8 h-8" variant={"destructive"} onClick={() => { setIsOpen(!isOpen) }}>
-                  <Trash2 className="icon-size" />
-                </Button>
-              </div>
-              <div className="md:hidden">
-                <DropdownMenu>
-                  <DropdownMenuTrigger>	&#46;	&#46;	&#46;</DropdownMenuTrigger>
-                  <DropdownMenuContent>
-                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem asChild>
-                      <Link href={`${baseUrl}/share/${item.letter_id}`} target="_blank">
-                        View
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => { handleCopy(item.letter_id) }}>Copy URL</DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => { setIsOpen(!isOpen) }}>Delete</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-
-              </div>
-            </CardContent>
-            <CardFooter>
-              <p className="text-xs text-neutral-400">
-                {formatDate(item.created_at)}
-              </p>
-            </CardFooter>
-          </Card>
-          <AlertDialog open={openDialogId === item.id} onOpenChange={() => setOpenDialogId(null)}>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This action cannot be undone. This will permanently delete your account
-                  and remove your data from our servers.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel className="!border-neutral-100 !text-neutral-500 !bg-neutral-100">Cancel</AlertDialogCancel>
-                <AlertDialogAction asChild>
-                  <Button className="bg-red-500 text-white hover:bg-red-100 hover:text-red-500" onClick={() => { deleteLetter(item.id) }}>
-                    Continue
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pb-2 flex items-center justify-between">
+                <p className="w-1/2 truncate text-neutral-400">
+                  {item.text}
+                </p>
+                {/* Actions for letters on medium screen*/}
+                <div className="md:flex items-center gap-2 hidden">
+                  <Button size={"icon"} className="w-8 h-8" asChild>
+                    <Link href={`${baseUrl}/share/${item.letter_id}`} target="_blank">
+                      <EyeIcon className="icon-size" />
+                    </Link>
                   </Button>
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-        </Fragment>
-      ))}
+                  <Button size={"icon"} className="w-8 h-8" variant={"outline"} onClick={() => { handleCopy(item.letter_id) }}>
+                    <CopyIcon className="icon-size" />
+                  </Button>
+                  <Button size={"icon"} className="w-8 h-8" variant={"destructive"} onClick={() => { setOpenDialogId(item.id) }}>
+                    <Trash2 className="icon-size" />
+                  </Button>
+                </div>
+                {/* Actions for letters on small screen */}
+                <div className="md:hidden">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger>	&#46;	&#46;	&#46;</DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                      <DropdownMenuSeparator />
+                      <DropdownMenuItem asChild>
+                        <Link href={`${baseUrl}/share/${item.letter_id}`} target="_blank">
+                          View
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => { handleCopy(item.letter_id) }}>Copy URL</DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => { setOpenDialogId(item.id) }}>Delete</DropdownMenuItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+
+                </div>
+              </CardContent>
+              {/* Date of the letter created*/}
+              <CardFooter>
+                <p className="text-xs text-neutral-400">
+                  {formatDate(item.created_at)}
+                </p>
+              </CardFooter>
+            </Card>
+            {/* Alert Dialog for deleting a letter */}
+            <AlertDialog open={openDialogId === item.id} onOpenChange={() => setOpenDialogId(null)}>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete your account
+                    and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel className="!border-neutral-100 !text-neutral-500 !bg-neutral-100">Cancel</AlertDialogCancel>
+                  <AlertDialogAction asChild>
+                    <Button className="bg-red-500 text-white hover:bg-red-100 hover:text-red-500" onClick={() => { deleteLetter(item.id) }}>
+                      Continue
+                    </Button>
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </Fragment>
+        ))}
+      </div>
     </div>
+
   )
 }

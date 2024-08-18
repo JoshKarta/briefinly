@@ -12,11 +12,12 @@ import { MailPlus } from 'lucide-react'
 import React from 'react'
 import LetterForm from './letter-form'
 
-export default function CreateLetter() {
+export default function CreateLetter({ fetchLetters }: { fetchLetters: () => void }) {
     const [isOpen, setIsOpen] = React.useState(false)
 
     const handleDialog = () => {
         setIsOpen(!isOpen)
+        fetchLetters()
     }
 
     return (
@@ -34,7 +35,7 @@ export default function CreateLetter() {
                     <DialogHeader>
                         <DialogTitle>Create A new Record</DialogTitle>
                     </DialogHeader>
-                    <LetterForm handleDialog={handleDialog} />
+                    <LetterForm handleDialog={handleDialog} onLetterCreated={fetchLetters} />
                 </DialogContent>
             </Dialog>
         </div>
