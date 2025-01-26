@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
-export default function page() {
+export default function Page() {
   const createTest = useMutation(api.test.createTest);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -15,7 +15,7 @@ export default function page() {
 
     try {
       await createTest({
-        text: formData.get("text"),
+        text: formData.get("text") as string,
       });
       toast.success("Successfully created");
     } catch (error: any) {
