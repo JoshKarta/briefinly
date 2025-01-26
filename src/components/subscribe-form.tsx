@@ -19,7 +19,7 @@ import { api } from "../../convex/_generated/api";
 import { toast } from "sonner";
 
 export default function SubscribeForm() {
-  const createSubscription = useMutation(api.subscriptions.createSubscription);
+  // const createSubscription = useMutation(api.subscriptions.createSubscription);
 
   const formSchema = z.object({
     email: z.string().email(),
@@ -36,7 +36,7 @@ export default function SubscribeForm() {
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      createSubscription({ email: values.email });
+      console.log(values.email);
       toast.success("Check your email for updates");
       form.reset();
     } catch (error) {
@@ -47,7 +47,7 @@ export default function SubscribeForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 w-full">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-4">
         <FormField
           control={form.control}
           name="email"
