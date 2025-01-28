@@ -43,7 +43,9 @@ export default function LettersList() {
   const [openDialogId, setOpenDialogId] = useState<number | null>(null);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const letters = useQuery(api.letters.getLetters);
+  const letters = useQuery(api.letters.getLetters, {
+    user_id: user?.id as string,
+  });
 
   // Function to fetch all letters by user
   const fetchLetters = async () => {

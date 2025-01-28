@@ -6,6 +6,7 @@ export default defineSchema({
     title: v.string(),
     text: v.string(),
     user_id: v.string(),
+    user_email: v.string(),
     confetti: v.boolean(),
     confetti_type: v.string(),
     confetti_emoji: v.string(),

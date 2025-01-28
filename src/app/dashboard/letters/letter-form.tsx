@@ -43,7 +43,7 @@ export default function LetterForm({
       await createLetter({
         title: formData.get("title") as string,
         text: formData.get("text") as string,
-        user_id: user?.id || "",
+        user_id: user?.id as string,
         confetti: confettiEnabled,
         confetti_type: confettiType,
         confetti_emoji:
@@ -51,6 +51,7 @@ export default function LetterForm({
             ? (formData.get("confetti-emoji") as string)
             : "",
         letter_id: uuidV4(),
+        user_email: user?.primaryEmailAddress?.emailAddress as string,
       });
 
       formRef.current?.reset();

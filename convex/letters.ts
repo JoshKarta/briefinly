@@ -6,6 +6,7 @@ export const createLetter = mutation({
     title: v.string(),
     text: v.string(),
     user_id: v.string(),
+    user_email: v.string(),
     confetti: v.boolean(),
     confetti_type: v.string(),
     confetti_emoji: v.string(),
@@ -15,19 +16,23 @@ export const createLetter = mutation({
     await ctx.db.insert("letters", {
       title: args.title,
       text: args.text,
-      user_id: args.title,
+      user_id: args.user_id,
       confetti: args.confetti,
       confetti_type: args.confetti_type,
       confetti_emoji: args.confetti_emoji,
       letter_id: args.letter_id,
+      user_email: args.user_email,
     });
   },
 });
 
 export const getLetters = query({
-  args: {},
-  handler: async (ctx) => {
-    return await ctx.db.query("letters").collect();
+  args: { user_id: v.string() },
+  handler: async (ctx, { user_id }) => {
+    return await ctx.db
+      .query("letters")
+      .filter((q) => q.eq(q.field("user_id"), user_id))
+      .collect();
   },
 });
 
