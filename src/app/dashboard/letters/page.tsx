@@ -1,12 +1,10 @@
-import React from 'react'
-import LettersList from './letters-list'
-import CreateLetter from './create-letter'
-
+import React from "react";
+import LettersList from "./letters-list";
 
 export default async function page() {
-    return (
-        <div>
-            <LettersList />
-        </div>
-    )
+  return (
+    <div>
+      <LettersList />
+    </div>
+  );
 }

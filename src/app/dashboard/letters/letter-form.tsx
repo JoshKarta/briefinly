@@ -14,17 +14,15 @@ import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useUser } from "@clerk/nextjs";
 import { useMutation } from "convex/react";
-import { FormEvent, FormEventHandler, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { toast } from "sonner";
 import { api } from "../../../../convex/_generated/api";
 import { v4 as uuidV4 } from "uuid";
 
 export default function LetterForm({
   handleDialog,
-  onLetterCreated,
 }: {
   handleDialog: () => void;
-  onLetterCreated: () => void;
 }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [loading, setLoading] = useState(false);
@@ -57,7 +55,6 @@ export default function LetterForm({
       formRef.current?.reset();
       toast.success(`Letter created successfully`);
       handleDialog();
-      onLetterCreated();
     } catch (error) {
       toast.error("Something went wrong. Please try again later");
       console.error(error);

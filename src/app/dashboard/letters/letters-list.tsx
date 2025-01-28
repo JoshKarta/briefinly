@@ -38,28 +38,12 @@ import { api } from "../../../../convex/_generated/api";
 
 export default function LettersList() {
   const { user } = useUser();
-  // const [letters, setLetters] = useState<any>();
-  const [loading, setLoading] = useState<boolean>(true);
   const [openDialogId, setOpenDialogId] = useState<number | null>(null);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
   const letters = useQuery(api.letters.getLetters, {
     user_id: user?.id as string,
   });
-
-  // Function to fetch all letters by user
-  const fetchLetters = async () => {
-    if (user?.id) {
-      setLoading(true);
-      // const { data } = await supabase.from('letters').select('*').eq("user_id", user.id).order('created_at', { ascending: false });
-    }
-    setLoading(false);
-  };
-
-  // Fetch letters when page loads
-  useEffect(() => {
-    fetchLetters();
-  }, [user]);
 
   // Fucntion to delete a letter
   const deleteLetter = async (id: number) => {
@@ -68,7 +52,6 @@ export default function LettersList() {
       toast.error("Failed to delete letter.");
     } else {
       toast.success("Letter deleted successfully.");
-      await fetchLetters(); // Refetch letters after successful deletion
     }
   };
 
@@ -83,18 +66,10 @@ export default function LettersList() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="mt-14 flex w-full justify-center">
-        <div className="loader" />
-      </div>
-    );
-  }
-
   return (
     <div>
       {/* Modal for creating a Letter */}
-      <CreateLetter fetchLetters={fetchLetters} />
+      <CreateLetter />
       {/* All Fetched Letters */}
       <div className="mt-4 flex flex-col gap-2">
         {letters && letters?.length === 0 ? (
@@ -103,7 +78,7 @@ export default function LettersList() {
           </p>
         ) : (
           letters?.map((item: any) => (
-            <Fragment key={item.id}>
+            <div key={item.id}>
               {/* Single Card that displays letter information */}
               <Card className="hover-effect hover:shadow-md dark:shadow-neutral-500">
                 <CardHeader className="pb-0">
@@ -133,7 +108,7 @@ export default function LettersList() {
                     >
                       <CopyIcon className="icon-size" />
                     </Button>
-                    <Button
+                    {/* <Button
                       size={"icon"}
                       className="h-8 w-8"
                       variant={"destructive"}
@@ -142,7 +117,7 @@ export default function LettersList() {
                       }}
                     >
                       <Trash2 className="icon-size" />
-                    </Button>
+                    </Button> */}
                   </div>
                   {/* Actions for letters on small screen */}
                   <div className="md:hidden">
@@ -169,13 +144,13 @@ export default function LettersList() {
                         >
                           Copy URL
                         </DropdownMenuItem>
-                        <DropdownMenuItem
+                        {/* <DropdownMenuItem
                           onClick={() => {
                             setOpenDialogId(item.id);
                           }}
                         >
                           Delete
-                        </DropdownMenuItem>
+                        </DropdownMenuItem> */}
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
@@ -219,7 +194,7 @@ export default function LettersList() {
                   </AlertDialogFooter>
                 </AlertDialogContent>
               </AlertDialog>
-            </Fragment>
+            </div>
           ))
         )}
       </div>
